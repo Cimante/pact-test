@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { defineComponent } from "vue";
+import Chat from "./components/Chat.vue";
+
+defineComponent({
+  components: {
+    Chat,
+  },
+});
+</script>
 
 <template>
   <main class="App">
@@ -7,7 +16,11 @@
         <div class="sidebar__menu-toggle"></div>
         <div class="sidebar__search"></div>
       </header>
-      <div class="sidebar__list"></div>
+      <div class="sidebar__list">
+        <Chat />
+        <Chat />
+        <Chat />
+      </div>
     </section>
     <section class="messages"></section>
   </main>
