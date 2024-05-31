@@ -71,7 +71,7 @@
     font-size: 14px;
     font-weight: 400;
     height: 16px;
-    width: 168px;
+    width: 246px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
