@@ -29,7 +29,6 @@ defineComponent({
   height: 720px;
   display: flex;
   align-items: center;
-  border: 1px solid blue;
 }
 
 .messages {

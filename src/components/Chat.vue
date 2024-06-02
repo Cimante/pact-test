@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import { defineComponent } from "vue";
+import MessageItem from "./MessageItem.vue";
+
+defineComponent({
+  components: {
+    MessageItem,
+  },
+});
+</script>
+
 <template>
   <section class="Chat">
     <header class="Chat__header">
@@ -12,7 +23,13 @@
         <div class="submenu"></div>
       </div>
     </header>
-    <div class="Chat__content"></div>
+    <div class="Chat__content">
+      <div class="Chat__date-label text-sm">Сегодня</div>
+      <MessageItem class="white" />
+      <MessageItem class="color" />
+      <MessageItem class="white" />
+    </div>
+    <div class="Chat__form"></div>
   </section>
 </template>
 
@@ -20,6 +37,9 @@
 @import "../styles/variables";
 
 .Chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   background-color: $iceberg-blue;
@@ -61,6 +81,31 @@
       height: 40px;
       background-color: $light-green;
     }
+  }
+
+  &__content {
+    display: inline-flex;
+    flex-direction: column;
+    padding: 0 32px;
+    margin-top: auto;
+    width: 100%;
+    gap: 16px 0;
+
+    & > .Message:nth-child(odd) {
+      margin-left: auto;
+    }
+
+    & > .Message:nth-child(even) {
+      margin-right: auto;
+    }
+  }
+
+  &__date-label {
+    margin: 0 auto;
+    color: $white;
+    padding: 4px 12px;
+    background-color: rgba($dark-blue, 0.6);
+    border-radius: 12px;
   }
 }
 </style>
