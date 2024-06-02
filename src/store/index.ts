@@ -1,6 +1,12 @@
 import { defineStore } from "pinia";
 
 export const useStore = defineStore("store", {
-  state: () => ({}),
-  actions: {},
+  state: () => ({
+    isSidebarOpen: true,
+  }),
+  actions: {
+    toggleSidebar() {
+      this.isSidebarOpen = !this.isSidebarOpen;
+    },
+  },
 });

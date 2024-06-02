@@ -1,5 +1,11 @@
+<script setup lang="ts">
+defineProps({
+  expand: Boolean,
+});
+</script>
+
 <template>
-  <section class="chat-preview">
+  <section class="chat-preview" :class="{ 'chat-preview--expand': expand }">
     <div class="chat-preview__avatar"></div>
     <div class="chat-preview__content">
       <div class="chat-preview__header">
@@ -22,17 +28,20 @@
 @import "../styles/variables";
 
 .chat-preview {
-  width: 100%;
   height: 72px;
   display: grid;
   grid-template-columns: 48px 1fr;
   grid-template-rows: 48px 1fr;
   align-items: center;
   gap: 0 16px;
-  padding: 13px;
+  padding: 12px 16px;
   background-color: $white;
   transition: background-color 0.2s;
   cursor: default;
+
+  &--expand {
+    width: 100%;
+  }
 
   &:hover {
     background-color: rgba($navy-grey, 0.04);
@@ -64,7 +73,8 @@
 
   &__text-preview {
     height: 16px;
-    width: 246px;
+    max-width: 250px;
+    padding-right: 4px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

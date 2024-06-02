@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { defineComponent } from "vue";
 import ChatPreview from "./ChatPreview.vue";
+import { useStore } from "../store";
+
+const store = useStore();
 
 defineComponent({
   components: {
@@ -10,9 +13,9 @@ defineComponent({
 </script>
 
 <template>
-  <section class="sidebar">
+  <section class="sidebar" :class="{ 'sidebar--active': store.isSidebarOpen }">
     <header class="sidebar__header">
-      <div class="sidebar__menu-toggle">
+      <div class="sidebar__menu-toggle" @click="store.toggleSidebar()">
         <img src="/src/assets/icons/menu-icon.svg" alt="" />
       </div>
       <div class="sidebar__search">
@@ -21,9 +24,9 @@ defineComponent({
       </div>
     </header>
     <div class="sidebar__list">
-      <ChatPreview />
-      <ChatPreview />
-      <ChatPreview />
+      <ChatPreview :expand="store.isSidebarOpen" />
+      <ChatPreview :expand="store.isSidebarOpen" />
+      <ChatPreview :expand="store.isSidebarOpen" />
     </div>
   </section>
 </template>
@@ -34,9 +37,20 @@ defineComponent({
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 364px;
+  width: 80px;
   height: 100%;
   border-right: 1px solid $light-grey-2;
+  transition: all 0.3s;
+
+  &--active {
+    width: 364px;
+
+    .sidebar__search {
+      opacity: 1;
+      width: 100%;
+      padding: 8px 16px;
+    }
+  }
 
   &__header {
     display: flex;
@@ -62,21 +76,24 @@ defineComponent({
   }
 
   &__menu-toggle {
-    width: 40px;
+    min-width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
 
   &__search {
     display: flex;
     align-items: center;
     height: 100%;
-    width: 100%;
+    width: 0;
     border-radius: 22px;
     background-color: $light-grey;
-    padding: 8px 16px;
+    padding: 0;
+    opacity: 0;
+    transition: all 0.3s;
   }
 
   .search-input {
