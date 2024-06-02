@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { defineComponent } from "vue";
-import Chat from "./Chat.vue";
+import ChatPreview from "./ChatPreview.vue";
 
 defineComponent({
   components: {
-    Chat,
+    ChatPreview,
   },
 });
 </script>
@@ -13,17 +13,17 @@ defineComponent({
   <section class="sidebar">
     <header class="sidebar__header">
       <div class="sidebar__menu-toggle">
-        <img src="/src/assets/menu-icon.svg" alt="" />
+        <img src="/src/assets/icons/menu-icon.svg" alt="" />
       </div>
       <div class="sidebar__search">
-        <img src="/src/assets/search.svg" class="search-icon" />
+        <img src="/src/assets/icons/search.svg" class="search-icon" />
         <input class="search-input" placeholder="Поиск" />
       </div>
     </header>
     <div class="sidebar__list">
-      <Chat />
-      <Chat />
-      <Chat />
+      <ChatPreview />
+      <ChatPreview />
+      <ChatPreview />
     </div>
   </section>
 </template>
@@ -36,6 +36,7 @@ defineComponent({
   flex-direction: column;
   width: 364px;
   height: 100%;
+  border-right: 1px solid $light-grey-2;
 
   &__header {
     display: flex;

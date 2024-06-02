@@ -1,4 +1,47 @@
+@import "./variables.scss";
+
 * {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   box-sizing: border-box;
+  color: $rich-black;
 }
+
+.title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: $rich-black;
+}
+
+.text-secondary {
+  color: $navy-grey;
+}
+
+.text-md {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.text-sm {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.text-xs {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+// .verified {
+//   position: relative;
+
+//   &::after {
+//     position: absolute;
+//     right: 0;
+//     top: 0;
+//     content: "";
+//     width: 4px;
+//     height: 4px;
+//     background-color: red;
+//   }
+// }

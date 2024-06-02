@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { defineComponent } from "vue";
 import Sidebar from "./components/Sidebar.vue";
+import Chat from "./components/Chat.vue";
 
 defineComponent({
   components: {
     Sidebar,
+    Chat,
   },
 });
 </script>
@@ -12,7 +14,7 @@ defineComponent({
 <template>
   <main class="App">
     <Sidebar />
-    <section class="messages"></section>
+    <Chat />
   </main>
 </template>
 
