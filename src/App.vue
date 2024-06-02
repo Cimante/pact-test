@@ -32,9 +32,9 @@ defineComponent({
   background-color: $white;
 }
 
-.messages {
-  width: 100%;
-  height: 100%;
-  background-color: $iceberg-blue;
+@media screen and (max-width: 1280px) {
+  .App {
+    width: 100%;
+  }
 }
 </style>
