@@ -1,21 +1,32 @@
 <script setup lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import MessageCheck from "./MessageCheck.vue";
+
+const props = defineProps({
+  text: String,
+  type: String as () => "white" | "color",
+  time: Date,
+  status: String,
+});
 
 defineComponent({
   components: {
     MessageCheck,
   },
 });
+
+const messageTime = computed(() => {
+  return `${props.time?.getHours()}:${props.time?.getMinutes()}`;
+});
 </script>
 
 <template>
-  <section class="Message">
-    <div class="Message__text">Lorem Ipsum</div>
+  <section class="Message" :class="props.type">
+    <div class="Message__text">{{ props.text }}</div>
     <div class="Message__info">
-      <span class="Message__time text-xs">18:16</span>
+      <span class="Message__time text-xs">{{ messageTime }}</span>
       <div class="Message__status">
-        <MessageCheck />
+        <MessageCheck :status="props.status" :type="props.type" />
       </div>
     </div>
   </section>

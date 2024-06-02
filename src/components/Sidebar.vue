@@ -24,9 +24,20 @@ defineComponent({
       </div>
     </header>
     <div class="sidebar__list">
-      <ChatPreview :expand="store.isSidebarOpen" />
-      <ChatPreview :expand="store.isSidebarOpen" />
-      <ChatPreview :expand="store.isSidebarOpen" />
+      <ChatPreview
+        v-for="(chat, idx) in store.chats"
+        :key="`chat_${idx}`"
+        :focused="chat.id === store.chatSelectedId"
+        :chat-title="chat.name"
+        :unread-messages="
+          chat.messages.filter((msg) => msg.status === 'unread').length || 0
+        "
+        :last-message="
+          chat.messages.sort((a, b) => (a.time > b.time ? -1 : 1))[0]
+        "
+        :expand="store.isSidebarOpen"
+        @click="store.setActiveChat(chat.id)"
+      />
     </div>
   </section>
 </template>

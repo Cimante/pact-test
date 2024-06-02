@@ -1,24 +1,47 @@
 <script setup lang="ts">
-defineProps({
+import { computed } from "vue";
+
+const props = defineProps({
   expand: Boolean,
+  focused: Boolean,
+  lastMessage: Object,
+  chatTitle: String,
+  unreadMessages: Number,
+});
+
+const messageTime = computed(() => {
+  return `${props.lastMessage?.time.getHours()}:${props.lastMessage?.time.getMinutes()}`;
 });
 </script>
 
 <template>
-  <section class="chat-preview" :class="{ 'chat-preview--expand': expand }">
+  <section
+    class="chat-preview"
+    :class="{
+      'chat-preview--expand': expand,
+      'chat-preview--focused': focused,
+    }"
+  >
     <div class="chat-preview__avatar"></div>
     <div class="chat-preview__content">
       <div class="chat-preview__header">
         <div class="chat-preview__title chat-preview__title--verified title">
-          Чат 1
+          {{ chatTitle }}
         </div>
-        <div class="chat-preview__date text-xs">18:16</div>
+        <div class="chat-preview__date text-xs">
+          {{ messageTime }}
+        </div>
       </div>
       <div class="chat-preview__text">
         <span class="chat-preview__text-preview text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          {{ lastMessage?.text }}
         </span>
-        <div class="chat-preview__unread">1</div>
+        <div
+          class="chat-preview__unread"
+          v-if="unreadMessages && unreadMessages > 0"
+        >
+          {{ unreadMessages }}
+        </div>
       </div>
     </div>
   </section>
@@ -37,14 +60,19 @@ defineProps({
   padding: 12px 16px;
   background-color: $white;
   transition: background-color 0.2s;
-  cursor: default;
+  cursor: pointer;
 
   &--expand {
     width: 100%;
   }
 
-  &:hover {
+  &:hover,
+  &--focused {
     background-color: rgba($navy-grey, 0.04);
+  }
+
+  &__title {
+    white-space: nowrap;
   }
 
   &__content {
@@ -72,7 +100,7 @@ defineProps({
   }
 
   &__text-preview {
-    height: 16px;
+    height: 17px;
     max-width: 250px;
     padding-right: 4px;
     overflow: hidden;

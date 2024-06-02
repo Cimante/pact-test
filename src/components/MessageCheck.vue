@@ -1,5 +1,12 @@
+<script setup lang="ts">
+const props = defineProps({
+  status: String,
+  type: String as () => "white" | "color",
+});
+</script>
+
 <template>
-  <div class="message-check">
+  <div class="message-check" :class="[type]">
     <svg
       width="14"
       height="14"
@@ -17,6 +24,7 @@
       class="double-check"
       viewBox="0 0 14 14"
       fill="none"
+      v-if="props.status === 'read'"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -35,6 +43,12 @@
   align-items: center;
   justify-content: center;
 
+  &.color {
+    svg path {
+      fill: $white;
+    }
+  }
+
   svg path {
     fill: $rich-black;
   }
@@ -42,7 +56,6 @@
   .double-check {
     position: absolute;
     left: 3px;
-    display: none;
   }
 }
 </style>

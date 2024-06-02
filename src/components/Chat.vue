@@ -2,6 +2,9 @@
 import { defineComponent } from "vue";
 import MessageItem from "./MessageItem.vue";
 import SendMessage from "./SendMessage.vue";
+import { useStore } from "../store";
+
+const store = useStore();
 
 defineComponent({
   components: {
@@ -12,12 +15,18 @@ defineComponent({
 </script>
 
 <template>
-  <section class="Chat">
+  <div class="Chat__welcome text-sm" v-if="!store.isChatSelected">
+    <span>Выберите чат</span>
+  </div>
+
+  <section class="Chat" v-else>
     <header class="Chat__header">
       <div class="Chat__avatar"></div>
       <div class="Chat__info">
-        <span class="Chat__title title">Чат 1</span>
-        <div class="Chat__last-seen text-sm">в сети 5 мин назад</div>
+        <span class="Chat__title title">{{ store.activeChat?.name }}</span>
+        <div class="Chat__last-seen text-sm">
+          в сети {{ store.activeChat?.last_seen }}
+        </div>
       </div>
       <div class="Chat__controls">
         <div class="search">
@@ -34,9 +43,15 @@ defineComponent({
     <section class="Chat__body">
       <div class="Chat__content">
         <div class="Chat__date-label text-sm">Сегодня</div>
-        <MessageItem class="white" />
-        <MessageItem class="color" />
-        <MessageItem class="white" />
+        <MessageItem
+          v-for="(msg, idx) in store.activeChat?.messages"
+          :key="`msg_${idx}`"
+          :text="msg.text"
+          :time="msg.time"
+          :type="msg.from === 'self' ? 'color' : 'white'"
+          :status="msg.status"
+          :class="{ right: msg.from === 'self' }"
+        />
       </div>
       <div class="Chat__form">
         <SendMessage />
@@ -58,6 +73,23 @@ defineComponent({
 
   @media screen and (max-width: 1280px) {
     min-width: 384px;
+  }
+
+  &__welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: $iceberg-blue;
+
+    span {
+      display: inline-block;
+      color: $white;
+      padding: 4px 12px;
+      background-color: rgba($dark-blue, 0.6);
+      border-radius: 12px;
+    }
   }
 
   &__header {
@@ -111,12 +143,13 @@ defineComponent({
     width: 100%;
     gap: 16px 0;
 
-    & > .Message:nth-child(odd) {
-      margin-left: auto;
-    }
-
-    & > .Message:nth-child(even) {
+    & > .Message {
       margin-right: auto;
+
+      &.right {
+        margin-right: 0;
+        margin-left: auto;
+      }
     }
   }
 
