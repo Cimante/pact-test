@@ -56,6 +56,10 @@ defineComponent({
   height: 100%;
   background-color: $iceberg-blue;
 
+  @media screen and (max-width: 1280px) {
+    min-width: 384px;
+  }
+
   &__header {
     display: flex;
     align-items: center;
