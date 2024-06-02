@@ -1,5 +1,5 @@
 <template>
-  <div class="MessageCheck">
+  <div class="message-check">
     <svg
       width="14"
       height="14"
@@ -29,7 +29,7 @@
 <style lang="scss">
 @import "../styles/variables";
 
-.MessageCheck {
+.message-check {
   position: relative;
   display: flex;
   align-items: center;

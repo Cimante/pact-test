@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { defineComponent } from "vue";
 import MessageItem from "./MessageItem.vue";
+import SendMessage from "./SendMessage.vue";
 
 defineComponent({
   components: {
     MessageItem,
+    SendMessage,
   },
 });
 </script>
@@ -18,18 +20,28 @@ defineComponent({
         <div class="Chat__last-seen text-sm">в сети 5 мин назад</div>
       </div>
       <div class="Chat__controls">
-        <div class="search"></div>
-        <div class="phone"></div>
-        <div class="submenu"></div>
+        <div class="search">
+          <img src="/src/assets/icons/search.svg" alt="" />
+        </div>
+        <div class="phone">
+          <img src="/src/assets/icons/call.svg" alt="" />
+        </div>
+        <div class="submenu">
+          <img src="/src/assets/icons/menu-more.svg" alt="" />
+        </div>
       </div>
     </header>
-    <div class="Chat__content">
-      <div class="Chat__date-label text-sm">Сегодня</div>
-      <MessageItem class="white" />
-      <MessageItem class="color" />
-      <MessageItem class="white" />
-    </div>
-    <div class="Chat__form"></div>
+    <section class="Chat__body">
+      <div class="Chat__content">
+        <div class="Chat__date-label text-sm">Сегодня</div>
+        <MessageItem class="white" />
+        <MessageItem class="color" />
+        <MessageItem class="white" />
+      </div>
+      <div class="Chat__form">
+        <SendMessage />
+      </div>
+    </section>
   </section>
 </template>
 
@@ -76,17 +88,21 @@ defineComponent({
     gap: 8px;
     margin-left: auto;
     & > div {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 40px;
       height: 40px;
-      background-color: $light-green;
     }
+  }
+
+  &__body {
+    padding: 0 32px;
   }
 
   &__content {
     display: inline-flex;
     flex-direction: column;
-    padding: 0 32px;
     margin-top: auto;
     width: 100%;
     gap: 16px 0;
@@ -106,6 +122,10 @@ defineComponent({
     padding: 4px 12px;
     background-color: rgba($dark-blue, 0.6);
     border-radius: 12px;
+  }
+
+  &__form {
+    margin-top: 16px;
   }
 }
 </style>

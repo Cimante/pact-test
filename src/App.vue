@@ -29,6 +29,7 @@ defineComponent({
   height: 720px;
   display: flex;
   align-items: center;
+  background-color: $white;
 }
 
 .messages {

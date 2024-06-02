@@ -6,6 +6,10 @@
   color: $rich-black;
 }
 
+body {
+  background-color: $light-grey-2;
+}
+
 .title {
   font-weight: 600;
   font-size: 16px;
@@ -30,6 +34,15 @@
 .text-xs {
   font-size: 12px;
   line-height: 16px;
+}
+
+input {
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: $navy-grey;
+  }
 }
 
 // .verified {
