@@ -81,6 +81,24 @@ export const useStore = defineStore("store", {
       this.isChatSelected = true;
       this.chatSelectedId = chat_id;
     },
+    sendMessage(text: string) {
+      const currID = new Date().getMilliseconds();
+      const currChat = this.chats.find(
+        (chat) => chat.id === this.chatSelectedId
+      );
+      currChat?.messages?.push({
+        id: currID,
+        text,
+        time: new Date(),
+        from: "self",
+        status: "unread",
+      });
+      setTimeout(() => {
+        currChat?.messages.map((msg) => {
+          if (msg.id === currID) msg.status = "read";
+        });
+      }, 1000);
+    },
   },
   getters: {
     activeChat: (state) => {
