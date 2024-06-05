@@ -34,6 +34,7 @@ const messageTime = computed(() => {
       </div>
       <div class="chat-preview__text">
         <span class="chat-preview__text-preview text-sm">
+          {{ lastMessage?.from === "self" ? "Вы: " : "" }}
           {{ lastMessage?.text }}
         </span>
         <div
